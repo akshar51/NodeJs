@@ -1,28 +1,38 @@
 const express = require('express');
 const port = 5000;
 const app = express();
-const users = [];
+let users = [];
 
 
 app.set('view engine','ejs')
 app.use(express.urlencoded({extended:true}))
 
-
+// Fetch
 app.get('/',function(req,res){
-    res.render('index')
+    res.render('index',{users})
 })
 
-app.post('/signup',function(req,res){
+
+// Create
+app.post('/',function(req,res){
 
     let obj = {
         email : req.body.email,
-        password : req.body.password
+        password : req.body.password,
+        id : Date.now()
     }
     users.push(obj)
-    res.redirect('/')
+    res.redirect(req.get('Referrer') ||'/')
+    
 })
 
 
+// Delete
+app.get('/users/delete/:id',(req,res)=>{
+    let {id} = req.params
+    users = users.filter(val => val.id != id);
+    res.redirect(req.get('Referrer') ||'/')
+})
 
 app.listen(port,function(err){
     if(err){
