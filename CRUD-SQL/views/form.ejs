@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= user.id ? 'Edit' : 'Add' %> User</title>
+</head>
+<body>
+  <h2><%= user.id ? 'Edit' : 'Add' %> User</h2>
+  <form method="POST" action="<%= user.id ? '/update/' + user.id : '/save' %>">
+    <label>Name:</label>
+    <input type="text" name="name" value="<%= user.name || '' %>" required><br>
+    <label>Email:</label>
+    <input type="email" name="email" value="<%= user.email || '' %>" required><br>
+    <button type="submit">Submit</button>
+  </form>
+  <a href="/">Back</a>
+</body>
+</html>
