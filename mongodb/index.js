@@ -8,9 +8,6 @@ app.set('view engine','ejs')
 app.use(express.urlencoded({extended:true}));
 
 
-app.get('/',(req,res)=>{
-    res.render('addBooks')
-})
 
 
 app.post('/addBooks',(req,res)=>{
@@ -19,7 +16,7 @@ app.post('/addBooks',(req,res)=>{
         book_name : req.body.book_name,
         book_price : req.body.book_price,
     }
-
+    
     Books.create(obj)
     .then(()=>{
         return res.redirect(req.get('Referrer') || '/')
@@ -29,6 +26,31 @@ app.post('/addBooks',(req,res)=>{
         return res.redirect(req.get('Referrer')|| '/')
     })
 })
+
+app.get('/',(req,res)=>{
+    Books.find({})
+    .then((books)=>{
+        return res.render('addBooks',{books})
+    })
+    .catch((err)=>{
+        console.log(err);
+        return res.render('addBooks',{books :[]})
+    })
+})
+
+app.get('/book/delete/:id',(req,res)=>{
+    const {id} = req.params;
+    Books.findByIdAndDelete(id)
+    .then(() => {
+        res.redirect(req.get('Referrer') || '/');
+    })
+    .catch((err) => {
+        console.log(err);
+        res.redirect(req.get('Referrer') || '/');
+    });
+})
+
+
 
  app.listen(port,(err)=>{
     if(!err){
