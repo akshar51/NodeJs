@@ -1,3 +1,17 @@
-exports.addProductPage = (req,res)=>{
-    res.render('index.ejs')
+const Product = require("../models/productSchema")
+
+module.exports.home = (req,res)=>{
+    res.render('index')
+}
+
+module.exports.addProduct = async (req,res)=>{
+    try{
+        console.log(req.body)
+        await Product.create(req.body)
+        res.redirect(req.get('Referrer') || '/')
+    }
+    catch(err){
+        console.log(err)
+        res.redirect(req.get('Referrer') || '/')
+    }
 }

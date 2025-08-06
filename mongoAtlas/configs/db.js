@@ -1,10 +1,12 @@
-const mongoose = require("mongoose");
+const { default: mongoose } = require("mongoose");
 
+const db = async ()=>{
+    try {
+        await mongoose.connect('mongodb+srv://aksharparekh401:<db_password>@cluster0.ncwztql.mongodb.net/product')
+        console.log("Database connected..")
+    } catch (error) {
+        console.log(error)
+    }
+}
 
-mongoose.connect('mongodb+srv://aksharparekh401:12345@cluster0.ncwztql.mongodb.net/product')
-
-let Product = mongoose.connection
-
-module.exports = Product;
-
-
+module.exports = db;
