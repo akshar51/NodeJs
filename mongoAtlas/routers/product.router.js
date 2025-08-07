@@ -1,11 +1,13 @@
 const { Router } = require("express");
-const { home, addProduct } = require("../controllers/product.controller");
+const { home, addProduct, addProductPage, viewProductPage } = require("../controllers/product.controller");
 
 const productRoute = Router();
 
 
 productRoute.get('/',home)
-productRoute.post('/',addProduct)
+productRoute.get('/addProductPage',addProductPage)
+productRoute.get('/viewProductPage',viewProductPage)
+productRoute.post('/create',addProduct)
 
 
 

@@ -14,3 +14,11 @@ module.exports.addProduct = async (req,res)=>{
         res.redirect(req.get('Referrer') || '/')
     }
 }
+
+module.exports.addProductPage = (req,res)=>{
+    return res.render('pages/addProductPage')
+}
+
+module.exports.viewProductPage = (req,res)=>{
+    return res.render('pages/viewProductPage')
+}
