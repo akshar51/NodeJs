@@ -6,7 +6,6 @@ module.exports.home = (req,res)=>{
 
 module.exports.addProduct = async (req,res)=>{
     try{
-        console.log(req.body)
         await Product.create(req.body)
         res.redirect(req.get('Referrer') || '/')
     }

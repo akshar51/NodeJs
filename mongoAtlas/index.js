@@ -9,9 +9,9 @@ app.use(express.urlencoded({extended:true}))
 
 app.use('/',require('./routers/product.router'))
 
-app.listen(port,(err)=>{
+app.listen(port,async (err)=>{
     if(!err){
-        db();
+        await db();
         console.log("Server started..");
         console.log("http://localhost:"+port);
     }
