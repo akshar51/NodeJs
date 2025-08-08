@@ -19,6 +19,10 @@ module.exports.addProductPage =async (req,res)=>{
     return res.render('pages/addProductPage')
 }
 
+module.exports.editProductPage =async (req,res)=>{
+    return res.render('pages/editProductPage')
+}
+
 module.exports.viewProductPage =async (req,res)=>{
     try {
         let product = await Product.find({})
@@ -37,5 +41,16 @@ module.exports.deleteProduct = async (req,res)=>{
     } catch (error) {
         console.log(error)
         res.redirect(req.get("Referrer" || "/"))
+    }
+}
+
+module.exports.editProduct = async (req,res)=>{
+    try {
+        let {id} = req.params;
+        let product = await Product.findById(id)
+        res.render('pages/editProductPage',{product})
+    } catch (error) {
+        console.log(error)
+        res.render('pages/editProductPage',{product : []})
     }
 }
