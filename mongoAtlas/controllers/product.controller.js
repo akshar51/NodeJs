@@ -15,10 +15,27 @@ module.exports.addProduct = async (req,res)=>{
     }
 }
 
-module.exports.addProductPage = (req,res)=>{
+module.exports.addProductPage =async (req,res)=>{
     return res.render('pages/addProductPage')
 }
 
-module.exports.viewProductPage = (req,res)=>{
-    return res.render('pages/viewProductPage')
+module.exports.viewProductPage =async (req,res)=>{
+    try {
+        let product = await Product.find({})
+        return res.render('pages/viewProductPage',{product})
+    } catch (error) {
+        console.log(error)
+        return res.render('pages/viewProductPage',{product : []})
+    }
+}
+
+module.exports.deleteProduct = async (req,res)=>{
+    try {
+        let {id} = req.params
+        await Product.findByIdAndDelete(id);
+        res.redirect(req.get("Referrer" || "/"))
+    } catch (error) {
+        console.log(error)
+        res.redirect(req.get("Referrer" || "/"))
+    }
 }
