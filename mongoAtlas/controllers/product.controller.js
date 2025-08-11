@@ -54,3 +54,14 @@ module.exports.editProduct = async (req,res)=>{
         res.render('pages/editProductPage',{product : []})
     }
 }
+
+module.exports.updateProduct = async (req, res) => {
+    try {
+        let { id } = req.params;
+        await Product.findByIdAndUpdate(id, req.body, { new: true });
+        res.redirect('/viewProductPage');
+    } catch (error) {
+        console.log(error);
+        res.redirect('/viewProductPage');
+    }
+};

@@ -40,7 +40,7 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card">
-          <form class="form-horizontal" method="post" action="/create">
+          <form class="form-horizontal" method="post" action="/update/<%= product ?  product._id : '' %>">
             <div class="card-body">
               <h4 class="card-title">Edit :</h4>
               <div class="form-group row">
@@ -56,6 +56,7 @@
                     name="p_name"
                     id="p_name"
                     placeholder="Enter product name"
+                    value="<%= product ? product.p_name : '' %>"
                   />
                 </div>
               </div>
@@ -72,6 +73,7 @@
                     name="p_price"
                     id="p_price"
                     placeholder="Enter product price"
+                    value="<%= product ? product.p_price : '' %>"
                   />
                 </div>
               </div>
@@ -88,6 +90,7 @@
                     class="form-control" 
                     placeholder="Enter description"
                     >
+                  <%= product ? product.description : '' %>
                 </textarea>
                 </div>
               </div>
@@ -100,9 +103,9 @@
                 <div class="col-sm-9">
                   <select name="category" id="category" class="form-control">
                 <option value="" selected disabled>--Select--Category</option>
-                <option value="Fashion">Fashion</option>
-                <option value="Electronic">Electronic</option>
-                <option value="Appliance">Appliance</option>
+                <option value="Fashion"  <%= product.category === 'Fashion' ? 'selected' : '' %> >Fashion</option>
+                <option value="Electronic" <%= product.category === 'Electronic' ? 'selected' : '' %> >Electronic</option>
+                <option value="Appliance" <%= product.category === 'Appliance' ? 'selected' : '' %> >Appliance</option>
               </select>
                 </div>
                 
