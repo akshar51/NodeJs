@@ -53,10 +53,13 @@
                                   </thead>
                                   <tbody>
                                     <% product.map((val,idx)=>{ 
-                                        let {p_name,p_price,category,description,id} = val
+                                        let {p_name,p_price,category,description,id,image} = val
                                         %>
                                         <tr>
                                             <td><%= idx +1%></td>
+                                            <td>
+                                                <img src="<%= image %>" alt="image" width="50" height="50">
+                                            </td>
                                             <td><%= p_name %></td>
                                             <td><%= p_price %></td>
                                             <td><%= description %></td>

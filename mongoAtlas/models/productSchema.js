@@ -1,6 +1,9 @@
 const { default: mongoose } = require("mongoose");
 
 let productSchema = new mongoose.Schema({
+    image : {
+        type: String,
+    },
     p_name : {
         type : String,
         required : true,
