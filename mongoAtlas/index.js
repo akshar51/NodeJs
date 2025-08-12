@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path')
 const { addProductPage } = require('./controllers/product.controller');
 const  db  = require('./configs/db');
 const app = express();
@@ -7,7 +8,7 @@ const port = 3000;
 app.set('view engine','ejs');
 app.use(express.urlencoded({extended:true}))
 app.use(express.static('assets'))
-app.use('/uploads',express.static((__dirname,'uploads')))
+app.use('/uploads', express.static((__dirname,'uploads')))
 
 
 app.use('/',require('./routers/product.router'))
