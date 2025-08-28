@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Edit Employee</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <h2>Edit Employee</h2>
+    <form action="/update/<%= employee._id %>" method="post">
+      <div class="mb-3">
+        <label>First Name</label>
+        <input type="text" class="form-control" name="fname" value="<%= employee.fname %>" required>
+      </div>
+      <div class="mb-3">
+        <label>Last Name</label>
+        <input type="text" class="form-control" name="lname" value="<%= employee.lname %>" required>
+      </div>
+      <div class="mb-3">
+        <label>Age</label>
+        <input type="number" class="form-control" name="age" value="<%= employee.age %>" required>
+      </div>
+      <div class="mb-3">
+        <label>Description</label>
+        <input type="text" class="form-control" name="description" value="<%= employee.description %>">
+      </div>
+      <div class="mb-3">
+        <label>Gender</label><br>
+        <input type="radio" name="gender" value="male" <%= employee.gender === 'male' ? 'checked' : '' %>> Male
+        <input type="radio" name="gender" value="female" <%= employee.gender === 'female' ? 'checked' : '' %>> Female
+      </div>
+      <div class="mb-3">
+        <label>Hobbies</label><br>
+        <input type="checkbox" name="hobbies" value="Reading" <%= employee.hobbies.includes('Reading') ? 'checked' : '' %>> Reading
+        <input type="checkbox" name="hobbies" value="Sports" <%= employee.hobbies.includes('Sports') ? 'checked' : '' %>> Sports
+        <input type="checkbox" name="hobbies" value="Music" <%= employee.hobbies.includes('Music') ? 'checked' : '' %>> Music
+      </div>
+      <div class="mb-3">
+        <label>Department</label>
+        <select name="department" class="form-select">
+          <option value="HR" <%= employee.department === 'HR' ? 'selected' : '' %>>HR</option>
+          <option value="IT" <%= employee.department === 'IT' ? 'selected' : '' %>>IT</option>
+          <option value="Sales" <%= employee.department === 'Sales' ? 'selected' : '' %>>Sales</option>
+          <option value="Finance" <%= employee.department === 'Finance' ? 'selected' : '' %>>Finance</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Update Employee</button>
+      <a href="/employees" class="btn btn-secondary">Cancel</a>
+    </form>
+  </div>
+</body>
+</html>

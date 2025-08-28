@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Employee List</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+  <div class="container mt-5">
+    <h2>Employees</h2>
+    <a href="/" class="btn btn-primary mb-3">Add Employee</a>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>First Name</th>
+          <th>LAst Name</th>
+          <th>Age</th>
+          <th>Description</th>
+          <th>Gender</th>
+          <th>Hobbies</th>
+          <th>Department</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% employees.map(emp => { %>
+          <tr>
+            <td><%= emp.fname %></td>
+            <td><%= emp.lname %></td>
+            <td><%= emp.age %></td>
+            <td><%= emp.description %></td>
+            <td><%= emp.gender %></td>
+            <td><%= emp.hobbies.join(", ") %></td>
+            <td><%= emp.department %></td>
+            <td>
+              <a href="/edit/<%= emp._id %>" class="btn btn-warning btn-sm">Edit</a>
+              <a href="/delete/<%= emp._id %>" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</body>
+</html>
