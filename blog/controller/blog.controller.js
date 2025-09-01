@@ -58,3 +58,8 @@ module.exports.login = async (req,res)=>{
         console.log(error)
     }
 }
+
+module.exports.logout = (req,res)=>{
+    res.clearCookie('userId')
+    res.redirect('/')
+}
