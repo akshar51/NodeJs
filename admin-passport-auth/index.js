@@ -9,9 +9,8 @@ const port = 3000
 
 
 app.set('view engine','ejs')
-app.use(bodyParser.urlencoded({extended:true}))
+app.use(express.urlencoded({extended:true}))
 app.use(express.static('public'))
-app.use('/',require('./router'))
 
 app.use(session({
     secret:'user',
@@ -19,9 +18,11 @@ app.use(session({
     saveUninitialized:false,
     cookie : {maxAge: 1000*60*60}
 }));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use('/',require('./router'))
 
 app.listen(port,(err)=>{
     if(!err){

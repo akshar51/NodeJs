@@ -1,4 +1,5 @@
 const User = require("../model")
+const bcrypt = require('bcrypt')
 
 module.exports.homePage = (req,res)=>{
     res.render('pages/index')
@@ -21,4 +22,10 @@ module.exports.signup =async (req,res)=>{
     } catch (error) {
         console.log(error.message)
     }
+}
+
+module.exports.logout = (req,res)=>{
+    req.logout(()=>{
+        return res.redirect('/')
+    })
 }

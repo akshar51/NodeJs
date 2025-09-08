@@ -1,4 +1,5 @@
 const passport = require("passport");
+const bcrypt = require('bcrypt')
 const User = require("../model");
 const LocalStrategy = require('passport-local').Strategy
 
@@ -31,7 +32,7 @@ passport.deserializeUser(async(id,done)=>{
 })
 
 passport.userAuth = (req,res,next)=>{
-    if(req.isAuthenticated){
+    if(req.isAuthenticated()){
         res.locals.user = req.user
         return next()
     }
