@@ -46,7 +46,7 @@ module.exports.changePass = async (req,res)=>{
             await user.save()
             console.log("Password change successfully...")
             req.flash('success','Password change successfully...')
-            res.redirect('/logout')
+            res.redirect('/login')
         }
         else{
             req.flash('error','New and Confirm password not match..')
