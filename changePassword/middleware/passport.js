@@ -39,4 +39,12 @@ passport.userAuth = (req,res,next)=>{
     return res.redirect('/login')
 }
 
+passport.flashMessage = (req,res,next)=>{
+    res.locals.flash = {
+        success : req.flash('success') || null ,
+        error : req.flash('error') || null
+    }
+    next()
+}
+
 module.exports = passport

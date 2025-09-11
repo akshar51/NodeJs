@@ -38,21 +38,24 @@ module.exports.changePass = async (req,res)=>{
     let {id} = req.params;
     let {oldpassword,newpassword,confirmpassword} = req.body
     let user = await User.findById(id)
-    let isValid = bcrypt.compare(user.password,oldpassword)
+    let isValid = await bcrypt.compare(oldpassword,user.password)
 
     if(isValid){
         if(newpassword == confirmpassword){
             user.password = await bcrypt.hash(newpassword,10)
             await user.save()
             console.log("Password change successfully...")
+            req.flash('success','Password change successfully...')
             res.redirect('/logout')
         }
         else{
+            req.flash('error','New and Confirm password not match..')
             console.log("New and Confirm password not match..")
             res.redirect(req.get('Referrer' || '/'))
         }
     }   
     else{
+        req.flash('error','Old password not match...')
         console.log("Old password not match...")
         res.redirect(req.get('Referrer' || '/'))
     }

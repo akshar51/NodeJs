@@ -4,6 +4,7 @@ const db = require('./config/db')
 const LocalStrategy = require('./middleware/passport')
 const session = require('express-session')
 const passport = require('passport')
+const flash = require('connect-flash');
 const app = express()
 const port = 3000
 
@@ -20,10 +21,12 @@ app.use(session({
     saveUninitialized:false,
     cookie : {maxAge: 1000*60*60}
 }));
+app.use(flash())
 
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(passport.flashMessage)
 
 app.use('/',require('./router'))
 
