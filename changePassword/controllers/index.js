@@ -13,6 +13,14 @@ module.exports.loginPage = (req,res)=>{
     res.render('pages/login')
 }
 
+module.exports.emailConfirmPage = (req,res)=>{
+    res.render('pages/emailConfirm')
+}
+
+module.exports.verifyOtpPage = (req,res)=>{
+    res.render('pages/verifyOtp')
+}
+
 module.exports.signup =async (req,res)=>{
     try {
         req.body.password = await bcrypt.hash(req.body.password,10)
