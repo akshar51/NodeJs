@@ -16,10 +16,12 @@
     "bcrypt": "^6.0.0",
     "body-parser": "^2.2.0",
     "connect-flash": "^0.1.1",
+    "dotenv": "^17.2.2",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
     "express-session": "^1.18.2",
     "mongoose": "^8.18.0",
+    "nodemailer": "^7.0.6",
     "passport": "^0.7.0",
     "passport-local": "^1.0.0",
     "sweetalert": "^2.1.2"
