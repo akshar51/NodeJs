@@ -22,6 +22,18 @@ module.exports.verifyOtpPage = (req, res) => {
   res.render("pages/verifyOtp");
 };
 
+module.exports.emailConfirmPage = (req,res)=>{
+  res.render('pages/emailConfirm')
+}
+
+module.exports.verifyPage = (req,res)=>{
+  res.render('pages/verify')
+}
+
+module.exports.newPassPage = (req,res)=>{
+  res.render('pages/newPass')
+}
+
 module.exports.signup = async (req, res) => {
   try {
     req.body.password = await bcrypt.hash(req.body.password, 10);
