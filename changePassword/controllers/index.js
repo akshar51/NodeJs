@@ -22,17 +22,17 @@ module.exports.verifyOtpPage = (req, res) => {
   res.render("pages/verifyOtp");
 };
 
-module.exports.emailConfirmPage = (req,res)=>{
-  res.render('pages/emailConfirm')
-}
+module.exports.emailConfirmPage = (req, res) => {
+  res.render("pages/emailConfirm");
+};
 
-module.exports.verifyPage = (req,res)=>{
-  res.render('pages/verify')
-}
+module.exports.verifyPage = (req, res) => {
+  res.render("pages/verify");
+};
 
-module.exports.newPassPage = (req,res)=>{
-  res.render('pages/newPass')
-}
+module.exports.newPassPage = (req, res) => {
+  res.render("pages/newPass");
+};
 
 module.exports.signup = async (req, res) => {
   try {
@@ -52,7 +52,7 @@ module.exports.signup = async (req, res) => {
     });
 
     const info = await transporter.sendMail({
-      from: '<aksharparekh401@gmail.com>',
+      from: "<aksharparekh401@gmail.com>",
       to: req.body.email,
       subject: "OTP Verification",
       html: `<h3>Otp is ${otp}</h3>`, // HTML body
@@ -115,3 +115,77 @@ module.exports.verifyOtp = async (req, res) => {
     res.redirect(req.get("Referrer") || "/");
   }
 };
+
+module.exports.emailConfirm = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+    temUser = user;
+    console.log(user)
+    if (user) {
+      otp = Math.floor(100000 + Math.random() * 900000);
+
+      // Nodemailer
+      const transporter = nodemailer.createTransport({
+        service: "Gmail",
+        port: 587,
+        secure: false, // true for 465, false for other ports
+        auth: {
+          user: "aksharparekh401@gmail.com",
+          pass: process.env.pass,
+        },
+      });
+
+      const info = await transporter.sendMail({
+        from: "<aksharparekh401@gmail.com>",
+        to: user.email,
+        subject: "OTP Verification",
+        html: `<h3>Otp is ${otp}</h3>`, // HTML body
+      });
+      console.log("Message sent:", info.messageId);
+      return res.redirect("/verify");
+
+    }else{
+      console.log("Email not found...")
+      res.redirect(req.get('Referrer' || '/'))
+    }
+
+
+  } catch (error) {
+    console.log(error.message)
+    res.redirect(req.get('Referrer' || '/'))
+  }
+};
+
+
+module.exports.verify = (req,res)=>{
+  if(otp == req.body.otp){
+    res.cookie('userId',temUser.id)
+    res.redirect('/newPass')
+  }else{
+    console.log("OTP not match...")
+    return res.redirect(req.get("Referrer") || "/");
+  }
+}
+
+module.exports.newPass = async (req,res)=>{
+  try {
+    const {newpassword,confirmpassword} = req.body;
+    let {userId} = req.cookies
+
+    if(newpassword == confirmpassword){
+      let user = await User.findById(userId)
+      user.password = await bcrypt.hash(newpassword,10)
+      await user.save()
+      console.log("Password change successfully...")
+      return res.redirect("/login");
+      
+    }else{
+      console.log("New and Confirm password not match...")
+      res.redirect(req.get('Referrer' || '/'))
+    }
+  } catch (error) {
+    console.log(error.message)
+    res.redirect(req.get("Referrer" || '/'))
+  }
+}

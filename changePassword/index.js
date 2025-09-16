@@ -5,6 +5,7 @@ const LocalStrategy = require('./middleware/passport')
 const session = require('express-session')
 const passport = require('passport')
 const flash = require('connect-flash');
+const cookieParser = require('cookie-parser')
 const app = express()
 const port = 3000
 
@@ -12,7 +13,7 @@ const port = 3000
 app.set('view engine','ejs')
 app.use(express.urlencoded({extended:true}))
 app.use(express.static('public'))
-
+app.use(cookieParser())
 
 
 app.use(session({
