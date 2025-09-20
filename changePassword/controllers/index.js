@@ -167,6 +167,7 @@ module.exports.verify = (req,res)=>{
     return res.redirect(req.get("Referrer") || "/");
   }
 }
+   
 
 module.exports.newPass = async (req,res)=>{
   try {
