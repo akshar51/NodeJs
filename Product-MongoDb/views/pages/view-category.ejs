@@ -44,26 +44,20 @@
                                   <thead>
                                     <tr>
                                       <th scope="col">#</th>
-                                      <th scope="col">Image</th>
-                                      <th scope="col">Title</th>
-                                      <th scope="col">Price</th>
-                                      <th scope="col">Description</th>
+                                      <th scope="col">Name</th>
                                       <th scope="col">Action</th>
                                     </tr>
                                   </thead>
                                   <tbody>
-                                    <% product.forEach((item,idx)=>{ 
-                                        let {title,image,description,price,id} = item    
+                                    <% category.forEach((item,idx)=>{ 
+                                        let {name,id} = item    
                                     %>
                                         <tr>
                                             <th scope="row"><%= idx+1 %></th>
-                                            <td><img src=<%= image%> style="width: 100px;height: 100px; object-fit:cover" alt=""></td>
-                                            <td><%= title%></td>
-                                            <td><%= price%></td>
-                                            <td><%= description %></td>
+                                            <td><%= name %></td>
                                             <td>
-                                                <a href="/delete/<%= id %>" class="btn btn-danger me-1">Delete</a>
-                                                <a href="/edit/<%= id %>" class="btn btn-warning">Edit</a>
+                                                <a href="/category/delete/<%= id %>" class="btn btn-danger me-1">Delete</a>
+                                                <a href="/category/edit/<%= id %>" class="btn btn-warning">Edit</a>
                                             </td>
                                         </tr>
                                     <% }) %>
