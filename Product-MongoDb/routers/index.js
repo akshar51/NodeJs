@@ -17,5 +17,6 @@ router.post('/form-basic',imageUpload,adminClt.formBasic)
 router.post('/update/:id',adminClt.updateProduct)
 
 router.use('/category',require('./category.router'))
+router.use('/subcategory',require('./subCategory.route'))
 
 module.exports = router
