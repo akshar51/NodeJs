@@ -4,12 +4,15 @@ const fs = require("fs");
 exports.homePage = (req, res) => {
   res.render("pages/index");
 };
+
 exports.formBasicPage = (req, res) => {
   res.render("pages/form-basic");
 };
+
 exports.editPage = (req, res) => {
   res.render("pages/editPage");
 };
+
 exports.tablePage = async (req, res) => {
   try {
     let product = await Product.find({});

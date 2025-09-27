@@ -4,8 +4,10 @@ const catRouter = Router()
 
 catRouter.get('/add-category',categoryCtl.addCategory)
 catRouter.get('/view-category',categoryCtl.viewData)
+catRouter.get('/delete/:id',categoryCtl.deleteCategory)
+catRouter.get('/edit/:id',categoryCtl.editCategory)
 
 catRouter.post('/add-category',categoryCtl.addCategoryData)
-catRouter.get('/delete/:id',categoryCtl.deleteCategory)
+catRouter.post('/update/:id',categoryCtl.updateCategory)
 
 module.exports = catRouter

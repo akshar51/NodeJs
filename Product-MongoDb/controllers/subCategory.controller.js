@@ -35,3 +35,25 @@ exports.delete = async (req,res)=>{
         res.redirect(req.get('Referrer')||'/')
     }
 }
+
+exports.editSubCategory = async (req,res)=>{
+    try {
+        let {id} = req.params
+        let subCategory = await SubCategory.findById(id)
+        res.render('pages/editSubCategory',{subCategory})
+    } catch (error) {
+        console.log(error.message)
+        res.render('pages/editSubCategory',{subCategory : []})
+    }
+}
+
+exports.updateSubCategory = async (req,res)=>{
+    try {
+        let {id} = req.params
+        await SubCategory.findByIdAndUpdate(id,req.body,{new : true})
+        res.redirect('/subcategory/view')
+    } catch (error) {
+        console.log(error.message)
+        res.redirect('/subcategory/view')
+    }
+}
