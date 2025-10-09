@@ -1,5 +1,6 @@
 const User = require("../model/user.model")
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 const getAlluser = async (req,res)=>{
     try {
@@ -48,5 +49,31 @@ const updateUser = async (req,res)=>{
     }
 }
 
+const login = async (req,res)=>{
+    try {
+        const {email,password} = req.body;
+        let user = await User.findOne({email})
 
-module.exports = {getAlluser,getUser,deleteUser,createUser,updateUser}
+        if(user){
+                let isValid = await bcrypt.compare(password,user.password)
+            if(isValid){
+                let payload = {
+                id : user.id,
+                role : 'user',
+                }
+                let token = jwt.sign(payload,'private-key')
+                console.log(token)
+                res.status(200).json({message : "Login successful..."})
+            }else{
+                res.status(200).json({message : "Invalid password..."})
+            }
+        }else{
+            res.status(500).json({message:'user not found'})
+        }
+    } catch (error) {
+        return res.status(404).json({message:error.message})
+    }
+}
+
+
+module.exports = {getAlluser,getUser,deleteUser,createUser,updateUser,login}
