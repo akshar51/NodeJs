@@ -2,7 +2,8 @@ require('dotenv').config()
 
 const dotenv = {
     PORT : process.env.PORT,
-    MONGODB_URL : process.env.MONGODB_URL
+    MONGODB_URL : process.env.MONGODB_URL,
+    PRIVATE_KEY : process.env.PRIVATE_KEY
 }
 
 module.exports = dotenv
